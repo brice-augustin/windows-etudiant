@@ -46,7 +46,7 @@ pref("network.proxy.ssl", "$PROXYIUT");
 pref("network.proxy.ssl_port", $PROXYIUT_PORT);
 pref("network.proxy.ftp", "$PROXYIUT");
 pref("network.proxy.ftp_port", $PROXYIUT_PORT);
-pref("network.proxy.no_proxies_on", "localhost,127.0.0.1,172.16.0.0/24,*.iutcv.fr");
+pref("network.proxy.no_proxies_on", "localhost,127.0.0.1,172.16.0.0/16,*.iutcv.fr");
 pref("network.proxy.type", 1);
 "@ | Out-File "C:\Program Files\Mozilla Firefox\defaults\pref\local-settings.js"
 
