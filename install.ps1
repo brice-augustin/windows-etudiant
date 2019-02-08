@@ -1,7 +1,7 @@
 Set-ExecutionPolicy -ExecutionPolicy Bypass
 
 $PROXYIUT = "proxy.iutcv.fr"
-$PROXY_PORT = 3128
+$PROXYIUT_PORT = 3128
 $DATA_PARTITION = "partage"
 
 ####
