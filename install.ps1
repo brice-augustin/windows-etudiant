@@ -1,3 +1,5 @@
+Set-ExecutionPolicy -ExecutionPolicy Bypass
+
 $PROXYIUT = "proxy.iutcv.fr"
 $PROXY_PORT = 3128
 $DATA_PARTITION = "partage"
@@ -38,7 +40,10 @@ Set-ItemProperty 'HKCU:\Control Panel\Colors' -Name Background -Value "200 200 2
 ####
 netsh winhttp set proxy http://$PROXYIUT:$PROXY_PORT
 
+# L'ordre est important !? proxy.type en premier
+# Attention à l'encodage du fichier !?
 @"
+pref("network.proxy.type", 1);
 pref("network.proxy.http", "$PROXYIUT");
 pref("network.proxy.http_port", $PROXYIUT_PORT);
 pref("network.proxy.share_proxy_settings", true);
@@ -47,7 +52,6 @@ pref("network.proxy.ssl_port", $PROXYIUT_PORT);
 pref("network.proxy.ftp", "$PROXYIUT");
 pref("network.proxy.ftp_port", $PROXYIUT_PORT);
 pref("network.proxy.no_proxies_on", "localhost,127.0.0.1,172.16.0.0/16,*.iutcv.fr");
-pref("network.proxy.type", 1);
 "@ | Out-File "C:\Program Files\Mozilla Firefox\defaults\pref\local-settings.js"
 
 ####
