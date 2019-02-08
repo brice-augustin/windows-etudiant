@@ -38,12 +38,11 @@ Set-ItemProperty 'HKCU:\Control Panel\Colors' -Name Background -Value "200 200 2
 ####
 # Proxy
 ####
-netsh winhttp set proxy http://$PROXYIUT:$PROXY_PORT
+netsh winhttp set proxy http://${PROXYIUT}:${PROXY_PORT}
 
 # L'ordre est important !? proxy.type en premier
 # Attention à l'encodage du fichier !?
 @"
-pref("network.proxy.type", 1);
 pref("network.proxy.http", "$PROXYIUT");
 pref("network.proxy.http_port", $PROXYIUT_PORT);
 pref("network.proxy.share_proxy_settings", true);
@@ -52,6 +51,7 @@ pref("network.proxy.ssl_port", $PROXYIUT_PORT);
 pref("network.proxy.ftp", "$PROXYIUT");
 pref("network.proxy.ftp_port", $PROXYIUT_PORT);
 pref("network.proxy.no_proxies_on", "localhost,127.0.0.1,172.16.0.0/16,*.iutcv.fr");
+pref("network.proxy.type", 1);
 "@ | Out-File "C:\Program Files\Mozilla Firefox\defaults\pref\local-settings.js"
 
 ####
@@ -59,6 +59,6 @@ pref("network.proxy.no_proxies_on", "localhost,127.0.0.1,172.16.0.0/16,*.iutcv.f
 # https://gist.github.com/mmdemirbas/5229315
 ####
 
-Invoke-WebRequest -Proxy http://$PROXYIUT:$PROXY_PORT -Uri "https://gist.githubusercontent.com/mmdemirbas/5229315/raw/d386687980596d76bb30266e93bf40d6fec6f75c/set-ntfs-ro.ps1 -OutFile "ntfs-ro.ps1"
+Invoke-WebRequest -Proxy http://${PROXYIUT}:${PROXY_PORT} -Uri "https://gist.githubusercontent.com/mmdemirbas/5229315/raw/d386687980596d76bb30266e93bf40d6fec6f75c/set-ntfs-ro.ps1" -OutFile "ntfs-ro.ps1"
 
-.\ntfs-ro.ps1 $DATA_PARTITION
+.\ntfs-ro.ps1 set $DATA_PARTITION
