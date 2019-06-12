@@ -35,6 +35,11 @@ Register-ScheduledTask -TaskName Taint -Action $Act -Trigger $Trig -Settings $Se
 Set-ItemProperty 'HKCU:\Control Panel\Desktop' -Name Wallpaper -Value ""
 Set-ItemProperty 'HKCU:\Control Panel\Colors' -Name Background -Value "200 200 200"
 
+# Marquer l'OS comme 'sali'. Il sera marqué 'propre' seulement après la restauration.
+# Evite qu'il soit marqué 'propre' prématurément, et qu'il le reste après un reboot
+# sauvage pendant une restauration
+$res = New-Item "c:\taint\tainted" -ItemType file
+
 ####
 # Proxy
 ####
