@@ -67,3 +67,18 @@ pref("network.proxy.type", 1);
 Invoke-WebRequest -Proxy http://${PROXYIUT}:${PROXY_PORT} -Uri "https://gist.githubusercontent.com/mmdemirbas/5229315/raw/d386687980596d76bb30266e93bf40d6fec6f75c/set-ntfs-ro.ps1" -OutFile "ntfs-ro.ps1"
 
 .\ntfs-ro.ps1 set $DATA_PARTITION
+
+####
+# Ping IPv4 et IPv6
+####
+
+New-NetFirewallRule -DisplayName "Autoriser ICMPv4" -Direction Inbound -Protocol ICMPv4 -Action Allow
+New-NetFirewallRule -DisplayName "Autoriser ICMPv6" -Direction Inbound -Protocol ICMPv6 -Action Allow
+
+####
+# Barre des tâches
+# http://www.msnloop.com/personnaliser-barre-taches-de-windows-10/
+####
+
+# Supprimer IE, ajouter wireshark, Firefox, Notepad++
+Import-StartLayout -LayoutPath layout.xml -MountPath $env:SystemDrive\
