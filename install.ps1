@@ -1,7 +1,7 @@
 Set-ExecutionPolicy -ExecutionPolicy Bypass
 
 $PROXYIUT = "proxy.iutcv.fr"
-$PROXYIUT_PORT = 3128
+$PROXY_PORT = 3128
 $DATA_PARTITION = "partage"
 
 ####
@@ -49,12 +49,12 @@ netsh winhttp set proxy http://${PROXYIUT}:${PROXY_PORT}
 # Attention à l'encodage du fichier !?
 @"
 pref("network.proxy.http", "$PROXYIUT");
-pref("network.proxy.http_port", $PROXYIUT_PORT);
+pref("network.proxy.http_port", $PROXY_PORT);
 pref("network.proxy.share_proxy_settings", true);
 pref("network.proxy.ssl", "$PROXYIUT");
-pref("network.proxy.ssl_port", $PROXYIUT_PORT);
+pref("network.proxy.ssl_port", $PROXY_PORT);
 pref("network.proxy.ftp", "$PROXYIUT");
-pref("network.proxy.ftp_port", $PROXYIUT_PORT);
+pref("network.proxy.ftp_port", $PROXY_PORT);
 pref("network.proxy.no_proxies_on", "localhost,127.0.0.1,172.16.0.0/16,*.iutcv.fr");
 pref("network.proxy.type", 1);
 "@ | Out-File "C:\Program Files\Mozilla Firefox\defaults\pref\local-settings.js"
