@@ -72,8 +72,15 @@ Invoke-WebRequest -Proxy http://${PROXYIUT}:${PROXY_PORT} -Uri "https://gist.git
 # Ping IPv4 et IPv6
 ####
 
-New-NetFirewallRule -DisplayName "Autoriser ICMPv4" -Direction Inbound -Protocol ICMPv4 -Action Allow
-New-NetFirewallRule -DisplayName "Autoriser ICMPv6" -Direction Inbound -Protocol ICMPv6 -Action Allow
+if (! Get-NetFirewallRule -DisplayName "Autoriser ICMPv4")
+{
+  New-NetFirewallRule -DisplayName "Autoriser ICMPv4" -Direction Inbound -Protocol ICMPv4 -Action Allow
+}
+
+if (! Get-NetFirewallRule -DisplayName "Autoriser ICMPv6") 
+{
+  New-NetFirewallRule -DisplayName "Autoriser ICMPv6" -Direction Inbound -Protocol ICMPv6 -Action Allow
+}
 
 ####
 # Barre des tâches
